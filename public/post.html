@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>NodeCasts.org - Realtime pubsub with Faye</h1>
+
+	<form name="send_message_form" accept-charset="utf-8">
+		
+		<label for="message">messaggio da inviare</label>
+		<input type="text" name="message" value="" id="message">
+		
+	</form>
+	
+	<p><button id="invia_button">Invia</button>
+	<div id="stato"></div>
+	</p>
+
+	<script src="/jquery-1.6.3.min.js"></script>
+	<script src="http://api.jquery.com/scripts/events.js"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+	
+		$(function() {  
+			
+			$("#message").keypress(function(event) {
+			  if ( event.which == 13 ) {
+			     event.preventDefault();
+				$("#invia_button").click();
+				
+				
+			   }
+			});
+			
+		  	$("#invia_button").click(function() {  
+		    // validate and process form here
+			
+				//$("#message").keypress();
+			
+				var message = $("input#message").val(); 
+				var data = new Date();
+			
+				var dataString = 'inputfield='+ message + '&timestamp=' + data;  
+				//alert (dataString);return false;  
+				$.ajax({  
+				  type: "POST",  
+				  url: "http://localhost:8000/message",  
+				  data: dataString,  
+				  success: function() {  
+				    $('#stato').text("messaggio inviato!").show().fadeOut(500);
+					$("input#message").val("");
+				  }
+			});  
+			//return false;
+			
+		  });  
+		});
+	</script>
+	    
+  </body>
+</html>

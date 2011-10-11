@@ -1,6 +1,6 @@
 <html>
   <body>
-    <h1>NodeCasts.org - Realtime pubsub with Faye Channel 1</h1>
+    <h1>NodeCasts.org - Realtime pubsub with Faye Channel 2</h1>
     <div id="messages"></div>
     
     <script src="/jquery-1.6.3.min.js"></script>
@@ -11,7 +11,7 @@
           timeout: 120
       });
 
-      	client.subscribe('/channel/1', function(message) {
+      	client.subscribe('/channel/2', function(message) {
         	$("#messages").append("<p>" + message.text1 + "</p>");
       	});
 
