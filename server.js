@@ -28,7 +28,7 @@ app.configure('production', function(){
 });
 
 app.post('/message', function(req, res) {
-	bayeux.getClient().publish('/channel/' + req.body.ch, { text: req.body.text, timestamp: req.body.timestamp, ch: req.body.ch });
+	bayeux.getClient().publish('/channel/' + req.body.ch, { text: req.body.text, timestamp: req.body.timestamp, ch: req.body.ch, clientid: req.body.clientid });
 	res.send(200);
 });
 
@@ -45,5 +45,5 @@ app.listen(Number(port));
 
 console.log('Listening on port ' + port );
 bayeux.getClient().subscribe('/channel/*', function(message) {
-				       console.log(message.timestamp + ' [' + message.ch + ']: ' + message.text);
+				       console.log(message.timestamp + ' [' + message.ch + '] ' + message.clientid + ' ' + message.text);
 				       });
