@@ -7,9 +7,10 @@
     <script src="/faye.js"></script>
 
     <script type="text/javascript">
-      var client = new Faye.Client('/faye', {
+      
+		var client = new Faye.Client('/faye', {
           timeout: 120
-      });
+      	});
 
       	client.subscribe('/channel/1', function(message) {
         	$("#messages").append("<p>" + message.text1 + "</p>");
@@ -18,6 +19,7 @@
 	//subscription.callback(function() {
 	//		  alert('Subscription is now active!');
 	//		  });
+	
     </script>
   </body>
 </html>

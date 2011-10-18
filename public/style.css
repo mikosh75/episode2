@@ -1,0 +1,318 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* General styles */
+html, 
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#fff;
+	min-width:600px;    /* Minimum width of layout - remove line if not required */
+						/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+	/*height:100%; */
+	font-family:Helvetica, Arial, sans-serif;
+	
+}
+a {
+	color:#369;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
+}
+img {
+	margin:10px 0 5px;
+}
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+/* Header styles */
+/*#header {
+	clear:both;
+	float:left;
+	width:100%;
+}
+*/
+#header {
+	border-bottom:1px solid #ede5a7;
+	background:none repeat scroll 0 0 #a1ab57;
+}
+/*#titolo {
+	clear:both;
+	float:left;
+	width:100%;
+}
+*/
+#header p,
+#header h1,
+#header h2 {
+	padding:.4em 15px .4em 15px;
+	margin:0;
+}
+#header ul {
+	clear:left;
+	float:left;
+	width:100%;
+	list-style:none;
+	margin:10px 0 0 0;
+	padding:0;
+}
+#header ul li {
+	display:inline;
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+#header ul li a {
+	display:block;
+	float:left;
+	margin:0 0 0 1px;
+	padding:3px 10px;
+	text-align:center;
+	background:#eee;
+	color:#000;
+	text-decoration:none;
+	position:relative;
+	left:15px;
+	line-height:1.3em;
+}
+#header ul li a:hover {
+	background:#C6D580;
+	color:#fff;
+}
+#header ul li a.active,
+#header ul li a.active:hover {
+	color:#000;
+	background:#EADCAE;
+	font-weight:bold;
+}
+#header ul li a span {
+	display:block;
+}
+/* 'widths' sub menu */
+#layoutdims {
+	clear:both;
+	background:none repeat scroll 0 0 #ede5a7;
+	border-top:4px solid #d7cc72;
+	margin:0;
+	padding:6px 15px !important;
+	text-align:right;
+}
+/* column container */
+.colmask {
+	position:relative;		/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+/*	clear:both;
+	float:left;
+*/	width:100%;			/* width of whole page */
+	overflow:hidden;	/* This chops off any overhanging divs */
+	padding-bottom:60px;   /* Height of the footer */
+	margin-top:10px;
+}
+/* 1 column full page settings */
+.fullpage {
+	background:#fff;
+}
+.fullpage .col1 {
+	margin:0 15px;
+}
+/* Footer styles */
+#footer {
+/*	clear:both;
+	float:left;
+*/	width:100%;
+	border-top:3px solid #707070;
+	background:none repeat scroll 0 0 #E0E0E0;
+	
+   position:absolute;
+   bottom:0;
+   /* height:30px;   /* Height of the footer */
+	
+}
+#type_here{
+	padding:10px;
+}
+
+#footer p {
+	padding:10px;
+	margin:0;
+}
+
+.chat-msg {
+	margin: 0;
+	padding-top: 0.5em;
+	padding-bottom: 0;
+	padding-left: 0.5em;
+}
+
+.chat-time {
+	margin-right: 10px;
+}
+
+.centered {
+	text-align: center;
+}
+#filtroNazione,
+#filtroZona,
+#filtroAgente,
+#filtroCliente,
+#filtroSottozona,
+#filtroLinea {
+	float: left;
+	margin-right: 20px;
+}
+#filtroArticolo {
+	float: left;
+	margin-right: 20px;
+}
+
+.filtroSelDesel img {
+	margin:4px 0 0;
+	border:0px;
+}
+
+.filtroSelDesel a:hover {
+	color:#000;
+	background:#fff;
+}
+
+#sceltaVisAnno{
+	padding-top:15px;	
+	clear:both;
+}
+#submitButton {
+	margin-top:15px;
+	clear:both;
+}
+
+.filtroMultipleSelect {
+	min-width: 100px;
+}
+
+#goButton {
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+}
+
+#goButton {
+	background-color: #ede5a7;
+	padding: 10px;
+	text-align: center;
+	width:200px;
+	/*margin-left: auto;
+	margin-right: auto;
+	*/
+	-moz-border-radius:5px 5px 5px 5px;
+}
+
+#loading {
+	color: #000;
+	background-color: #FF9;
+	font-weight: bold;
+	position: absolute;
+	z-index: 10;
+	width: 240px;
+	text-align:center;
+	margin-top:0px;
+	margin-left:-120px;
+	left:50%;
+	display:none;
+}
+
+#risultatiStats {
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.results_table_id {
+	margin-bottom:15px;
+}
+
+.results_table_id td.qta {
+	text-align:right;
+	width:30px;
+}
+
+.results_table_id td.val {
+	text-align:right;
+	width:55px;
+}
+
+.results_table_id th.first_col {
+	text-align:left;
+	width:90px;
+}
+.results_table_id th.first_col_per_medico {
+	text-align:left;
+	width:280px;
+}
+
+
+
+tr.separatore
+{
+	background-color:#000660;
+	height:2px;
+}
+
+
+tr.riga_richieste_stato
+{
+	background-color:#E5E5E5;
+	border-bottom-color:#6699CC;
+	border-bottom-style:dashed;
+	border-bottom-width:1px;
+	color:black;
+	font-family:Arial Narrow,Helvetica,sans-serifer;
+	font-size:9pt;
+	padding-left:1px;
+	text-align: center;
+}
+
+tr.riga_header_richieste_stato_statistiche
+{
+	background-color:#6699CC;
+	border-left-color-ltr-source:physical;
+	border-left-color-rtl-source:physical;
+	border-left-color-value:white;
+	border-left-style-ltr-source:physical;
+	border-left-style-rtl-source:physical;
+	border-left-style-value:solid;
+	border-left-width-ltr-source:physical;
+	border-left-width-rtl-source:physical;
+	border-left-width-value:1px;
+	border-right-color-ltr-source:physical;
+	border-right-color-rtl-source:physical;
+	border-right-color-value:white;
+	border-right-style-ltr-source:physical;
+	border-right-style-rtl-source:physical;
+	border-right-style-value:solid;
+	border-right-width-ltr-source:physical;
+	border-right-width-rtl-source:physical;
+	border-right-width-value:1px;
+	color:white;
+	font-family:Arial Narrow,Helvetica,sans-serif;
+	font-size:9pt;
+	font-weight:bold;
+	text-align:center;
+	text-transform:uppercase;
+	padding: 3px;
+	margin: 3px;	
+}
+

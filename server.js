@@ -10,8 +10,9 @@ var bayeux = new faye.NodeAdapter({
 var app = express.createServer();
 
 app.configure(function(){
-	app.use(express.methodOverride());
+	//app.use(express.logger({ format: ':method :url' }));
 	app.use(express.bodyParser());
+	app.use(express.methodOverride());
 	app.use(app.router);
 });
 
@@ -27,7 +28,7 @@ app.configure('production', function(){
 });
 
 app.post('/message', function(req, res) {
-	bayeux.getClient().publish('/channel/1', { text1: req.body.inputfield, text2: req.body.timestamp });
+	bayeux.getClient().publish('/channel/' + req.body.ch, { text: req.body.text, timestamp: req.body.timestamp, ch: req.body.ch });
 	res.send(200);
 });
 
@@ -44,5 +45,5 @@ app.listen(Number(port));
 
 console.log('Listening on port ' + port );
 bayeux.getClient().subscribe('/channel/*', function(message) {
-				       console.log(new Date() + ' [' + message.text2 + ']: ' + message.text1);
+				       console.log(message.timestamp + ' [' + message.ch + ']: ' + message.text);
 				       });
