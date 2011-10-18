@@ -28,7 +28,12 @@ app.configure('production', function(){
 });
 
 app.post('/message', function(req, res) {
-	bayeux.getClient().publish('/channel/' + req.body.ch, { text: req.body.text, timestamp: req.body.timestamp, ch: req.body.ch, clientid: req.body.clientid });
+	bayeux.getClient().publish('/channel/' + req.body.ch, { text : 		req.body.text, 
+															timestamp: 	req.body.timestamp, 
+															ch: 		req.body.ch, 
+															clientid: 	req.body.clientid 
+															}
+								);
 	res.send(200);
 });
 

@@ -27,7 +27,7 @@
 	<script type="text/javascript" charset="utf-8">
 	
 	(function($) {
-			
+			var localaddress = window.location.host;
 			var urlParams = {};
 			(function () {
 			    var e,
@@ -106,7 +106,7 @@
 				//alert (dataString);return false;  
 				$.ajax({  
 				  type: "POST",  
-				  url: "http://localhost:8000/message",  
+				  url: "http://" + localaddress + "/message",  
 				  data: dataString,  
 				  success: function() {  
 				    $('#stato').text("messaggio inviato!").show().fadeOut(500);
