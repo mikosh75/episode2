@@ -9,10 +9,18 @@ var bayeux = new faye.NodeAdapter({
 
 var app = express.createServer();
 
+setHeaders = function (req,res,next) {
+	res.header("X-Powered-By","nodejs");
+	res.header("Access-Control-Allow-Origin",req.header('origin'));
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");	 
+	next();
+}
+
 app.configure(function(){
 	//app.use(express.logger({ format: ':method :url' }));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+	app.use(setHeaders);
 	app.use(app.router);
 });
 
@@ -37,6 +45,15 @@ app.post('/message', function(req, res) {
 	res.send(200);
 });
 
+app.post('/alert_tecnico', function(req, res) {
+	bayeux.getClient().publish('/channel/' + req.body.ch, { id_chat : 	req.body.id_chat, 
+															ch: 		req.body.ch 
+															}
+								);
+	res.send(200);
+});
+
+
 app.get('/', function(req, res){
 	  res.send('hello world');
 });
@@ -50,5 +67,10 @@ app.listen(Number(port));
 
 console.log('Listening on port ' + port );
 bayeux.getClient().subscribe('/channel/*', function(message) {
-				       console.log(message.timestamp + ' [' + message.ch + '] ' + message.clientid + ' ' + message.text);
+						if (message.ch=="T3"){
+							var ts = (new Date()).getTime();
+							console.log(ts + ' [' + message.ch + '] ' + message.id_chat);
+						} else {
+							console.log(message.timestamp + ' [' + message.ch + '] ' + message.clientid + ' ' + message.text);
+						}
 				       });
