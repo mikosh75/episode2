@@ -43,11 +43,13 @@
 			
 			log = $("#chatlog");
 			
-			var client = new Faye.Client('/faye', {
+			var client = new Faye.Client('http://' + localaddress + '/faye', {
 		      timeout: 120
 		  	});
 
 		  	var subscription = client.subscribe('/channel/' + urlParams["ch"], function(message) {
+			
+				//alert(message.timestamp);
 			
 				var time = formatTime(ExtractInteger(message.timestamp)),
 					row = $("<div></div>").addClass("chat-msg");
@@ -150,6 +152,7 @@
 		
 		  
 		})(jQuery);
+		
 	</script>
 	    
 </html>
