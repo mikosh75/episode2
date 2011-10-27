@@ -39,7 +39,17 @@ app.post('/message', function(req, res) {
 	bayeux.getClient().publish('/channel/' + req.body.ch, { text : 		req.body.text, 
 															timestamp: 	req.body.timestamp, 
 															ch: 		req.body.ch, 
-															clientid: 	req.body.clientid 
+															clientid: 	req.body.clientid, 
+															utente: 	req.body.user 
+															}
+								);
+	res.send(200);
+});
+
+app.post('/is_typing', function(req, res) {
+	bayeux.getClient().publish('/is_typing/' + req.body.ch, { ch: 	req.body.ch,
+		 													utente: req.body.user,
+															timestamp: 	req.body.timestamp
 															}
 								);
 	res.send(200);
@@ -71,6 +81,9 @@ bayeux.getClient().subscribe('/channel/*', function(message) {
 							var ts = (new Date()).getTime();
 							console.log(ts + ' [' + message.ch + '] ' + message.id_chat);
 						} else {
-							console.log(message.timestamp + ' [' + message.ch + '] ' + message.clientid + ' ' + message.text);
+							console.log(message.timestamp + ' [' + message.ch + '] ' + message.clientid + ' ' + message.utente + ' ' + message.text);
 						}
+			   			});
+bayeux.getClient().subscribe('/is_typing/*', function(message) {
+							console.log(message.timestamp + ' [' + message.ch + '] ' + message.utente + ' is typing');
 				       });

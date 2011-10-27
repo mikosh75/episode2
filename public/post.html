@@ -5,7 +5,7 @@
 	<title>post</title>
 	<script src="/jquery-1.6.3.min.js"></script>
 	<script src="/faye.js"></script>
-	<script src="http://api.jquery.com/scripts/events.js"></script>
+	<script src="/events.js"></script>
 	<link rel="stylesheet" href="/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
 </head>
@@ -40,8 +40,10 @@
 			       urlParams[d(e[1])] = d(e[2]);
 			})();
 			
-			
 			log = $("#chatlog");
+			
+			var tecnico_nome = urlParams["tecnico"];
+			//alert(tecnico_nome);
 			
 			var client = new Faye.Client('http://' + localaddress + '/faye', {
 		      timeout: 120
@@ -49,14 +51,25 @@
 
 		  	var subscription = client.subscribe('/channel/' + urlParams["ch"], function(message) {
 			
-				//alert(message.timestamp);
+				alert(message.timestamp);
 			
-				var time = formatTime(ExtractInteger(message.timestamp)),
+/*				var time = formatTime(ExtractInteger(message.timestamp)),
 					row = $("<div></div>").addClass("chat-msg");
 
 				$("<span></span>")
 					.addClass("chat-time")
 					.text(time)
+					.appendTo(row);
+				
+				if (message.utente=="cliente") {
+					message.utente="io: ";
+				} else {
+					message.utente=tecnico_nome + ': ';
+				}
+				
+				$("<span></span>")
+					.addClass("chat-text")
+					.text(message.utente)
 					.appendTo(row);
 
 			//	$("<span></span>")
@@ -69,19 +82,28 @@
 					.text(message.text)
 					.appendTo(row);
 
-				row.appendTo(log);
+				row.appendTo(log); */
 			
 		    	// $("#chatlog").append("<p>" + message.text + "</p>");
 		  	});
-					
+
+			
 			subscription.callback(function() {
 			 // alert('Subscription is now active with client id: ' + client.getClientId());
 			
+				var ts = (new Date()).getTime();
+				var time = formatTime(ts);
 				var row = $("<div></div>").addClass("chat-msg");
 
 				$("<span></span>")
+					.addClass("chat-time")
+					.text(time)
+					.appendTo(row);
+					
+				$("<span></span>")
 					.addClass("chat-text")
-					.text('utente con id ' + client.getClientId() + ' collegato')
+					//.text('utente con id ' + client.getClientId() + ' collegato')
+					.text('Benvenuto! Sono ' + tecnico_nome + ', come posso aiutarla?')
 					.appendTo(row);
 
 				row.appendTo(log);
@@ -104,7 +126,7 @@
 				var message = $("#message").val(); 
 				var data = (new Date()).getTime();
 			
-				var dataString = 'text='+ message + '&timestamp=' + data +'&ch=' + urlParams["ch"] + '&clientid=' + client.getClientId();  
+				var dataString = 'text='+ message + '&timestamp=' + data +'&ch=' + urlParams["ch"] + '&clientid=' + client.getClientId() +'&user=cliente';  
 				//alert (dataString);return false;  
 				$.ajax({  
 				  type: "POST",  
@@ -116,10 +138,10 @@
 				  }
 			});  
 			//return false;
-			
-		  });
+		  	});
 		
-		function formatTime(timestamp) {
+		function formatTime(timestamp) 
+		{
 			var date = new Date(timestamp),
 				hours = date.getHours(),
 				minutes = date.getMinutes(),
